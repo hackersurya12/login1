@@ -180,95 +180,89 @@
         Your browser does not support the audio element.  
     </audio>  
 
-<script>  
-    let audio = document.getElementById("backgroundMusic");  
-    const validKeys = [
-        "wingo-7x9p-2k4r-8z3q", "wingo-1a2b-3c4d-5e6f", "wingo-9y8z-7x6w-5v4u",
-        "wingo-q1w2-e3r4-t5y6", "wingo-u7i8-o9p0-a1s2", "wingo-d3f4-g5h6-j7k8",
-        "wingo-l9m0-n1b2-v3c4", "wingo-x5z6-q7w8-s9e0", "wingo-r1t2-y3u4-i5o6",
-        "wingo-p7a8-s9d0-f1g2", "wingo-h3j4-k5l6-z7x8", "wingo-c9v0-b1n2-m3q4",
-        "wingo-w5e6-r7t8-y9u0", "wingo-i1o2-p3a4-s5d6", "wingo-f7g8-h9j0-k1l2",
-        "wingo-z3x4-c5v6-b7n8", "wingo-m9q0-w1e2-r3t4", "wingo-y5u6-i7o8-p9a0",
-        "wingo-s1d2-f3g4-h5j6", "wingo-k7l8-z9x0-c1v2", "wingo-b3n4-m5q6-w7e8",
-        "wingo-r9t0-y1u2-i3o4", "wingo-p5a6-s7d8-f9g0", "wingo-h1j2-k3l4-z5x6",
-        "wingo-c7v8-b9n0-m1q2", "wingo-w3e4-r5t6-y7u8", "wingo-i9o0-p1a2-s3d4",
-        "wingo-f5g6-h7j8-k9l0", "wingo-z1x2-c3v4-b5n6", "wingo-m7q8-w9e0-r1t2",
-        "wingo-y3u4-i5o6-p7a8", "wingo-s9d0-f1g2-h3j4", "wingo-k5l6-z7x8-c9v0",
-        "wingo-b1n2-m3q4-w5e6", "wingo-r7t8-y9u0-i1o2", "wingo-p3a4-s5d6-f7g8",
-        "wingo-h9j0-k1l2-z3x4", "wingo-c5v6-b7n8-m9q0", "wingo-w1e2-r3t4-y5u6",
-        "wingo-i7o8-p9a0-s1d2", "wingo-f3g4-h5j6-k7l8", "wingo-z9x0-c1v2-b3n4",
-        "wingo-m5q6-w7e8-r9t0", "wingo-y1u2-i3o4-p5a6", "wingo-s7d8-f9g0-h1j2",
-        "wingo-k3l4-z5x6-c7v8", "wingo-b9n0-m1q2-w3e4", "wingo-r5t6-y7u8-i9o0",
-        "wingo-p1a2-s3d4-f5g6", "wingo-h7j8-k9l0-z1x2", "wingo-c3v4-b5n6-m7q8",
-        "wingo-w9e0-r1t2-y3u4", "wingo-i5o6-p7a8-s9d0", "wingo-f1g2-h3j4-k5l6",
-        "wingo-z7x8-c9v0-b1n2", "wingo-m3q4-w5e6-r7t8", "wingo-y9u0-i1o2-p3a4",
-        "wingo-s5d6-f7g8-h9j0", "wingo-k1l2-z3x4-c5v6", "wingo-b7n8-m9q0-w1e2",
-        "wingo-r3t4-y5u6-i7o8", "wingo-p9a0-s1d2-f3g4", "wingo-h5j6-k7l8-z9x0",
-        "wingo-c1v2-b3n4-m5q6", "wingo-w7e8-r9t0-y1u2", "wingo-i3o4-p5a6-s7d8",
-        "wingo-f9g0-h1j2-k3l4", "wingo-z5x6-c7v8-b9n0", "wingo-m1q2-w3e4-r5t6",
-        "wingo-y7u8-i9o0-p1a2", "wingo-s3d4-f5g6-h7j8", "wingo-k9l0-z1x2-c3v4",
-        "wingo-b5n6-m7q8-w9e0", "wingo-r1t2-y3u4-i5o6", "wingo-p7a8-s9d0-f1g2",
-        "wingo-h3j4-k5l6-z7x8", "wingo-c9v0-b1n2-m3q4", "wingo-w5e6-r7t8-y9u0",
-        "wingo-i1o2-p3a4-s5d6", "wingo-f7g8-h9j0-k1l2", "wingo-z3x4-c5v6-b7n8",
-        "wingo-m9q0-w1e2-r3t4", "wingo-y5u6-i7o8-p9a0", "wingo-s1d2-f3g4-h5j6",
-        "wingo-k7l8-z9x0-c1v2", "wingo-b3n4-m5q6-w7e8", "wingo-r9t0-y1u2-i3o4",
-        "wingo-p5a6-s7d8-f9g0", "wingo-h1j2-k3l4-z5x6", "wingo-c7v8-b9n0-m1q2",
-        "wingo-w3e4-r5t6-y7u8", "wingo-i9o0-p1a2-s3d4", "wingo-f5g6-h7j8-k9l0",
-        "wingo-z1x2-c3v4-b5n6", "wingo-m7q8-w9e0-r1t2", "wingo-y3u4-i5o6-p7a8",
-        "wingo-s9d0-f1g2-h3j4", "wingo-k5l6-z7x8-c9v0", "wingo-b1n2-m3q4-w5e6",
-        "wingo-r7t8-y9u0-i1o2", "wingo-p3a4-s5d6-f7g8", "wingo-h9j0-k1l2-z3x4"
-    ];
+    <script>  
+        let audio = document.getElementById("backgroundMusic");  
+        const validKeys = [
+            "wingo-7x9p-2k4r-8z3q", "wingo-1a2b-3c4d-5e6f", "wingo-9y8z-7x6w-5v4u",
+            "wingo-q1w2-e3r4-t5y6", "wingo-u7i8-o9p0-a1s2", "wingo-d3f4-g5h6-j7k8",
+            "wingo-l9m0-n1b2-v3c4", "wingo-x5z6-q7w8-s9e0", "wingo-r1t2-y3u4-i5o6",
+            "wingo-p7a8-s9d0-f1g2", "wingo-h3j4-k5l6-z7x8", "wingo-c9v0-b1n2-m3q4",
+            "wingo-w5e6-r7t8-y9u0", "wingo-i1o2-p3a4-s5d6", "wingo-f7g8-h9j0-k1l2",
+            "wingo-z3x4-c5v6-b7n8", "wingo-m9q0-w1e2-r3t4", "wingo-y5u6-i7o8-p9a0",
+            "wingo-s1d2-f3g4-h5j6", "wingo-k7l8-z9x0-c1v2", "wingo-b3n4-m5q6-w7e8",
+            "wingo-r9t0-y1u2-i3o4", "wingo-p5a6-s7d8-f9g0", "wingo-h1j2-k3l4-z5x6",
+            "wingo-c7v8-b9n0-m1q2", "wingo-w3e4-r5t6-y7u8", "wingo-i9o0-p1a2-s3d4",
+            "wingo-f5g6-h7j8-k9l0", "wingo-z1x2-c3v4-b5n6", "wingo-m7q8-w9e0-r1t2",
+            "wingo-y3u4-i5o6-p7a8", "wingo-s9d0-f1g2-h3j4", "wingo-k5l6-z7x8-c9v0",
+            "wingo-b1n2-m3q4-w5e6", "wingo-r7t8-y9u0-i1o2", "wingo-p3a4-s5d6-f7g8",
+            "wingo-h9j0-k1l2-z3x4", "wingo-c5v6-b7n8-m9q0", "wingo-w1e2-r3t4-y5u6",
+            "wingo-i7o8-p9a0-s1d2", "wingo-f3g4-h5j6-k7l8", "wingo-z9x0-c1v2-b3n4",
+            "wingo-m5q6-w7e8-r9t0", "wingo-y1u2-i3o4-p5a6", "wingo-s7d8-f9g0-h1j2",
+            "wingo-k3l4-z5x6-c7v8", "wingo-b9n0-m1q2-w3e4", "wingo-r5t6-y7u8-i9o0",
+            "wingo-p1a2-s3d4-f5g6", "wingo-h7j8-k9l0-z1x2", "wingo-c3v4-b5n6-m7q8",
+            "wingo-w9e0-r1t2-y3u4", "wingo-i5o6-p7a8-s9d0", "wingo-f1g2-h3j4-k5l6",
+            "wingo-z7x8-c9v0-b1n2", "wingo-m3q4-w5e6-r7t8", "wingo-y9u0-i1o2-p3a4",
+            "wingo-s5d6-f7g8-h9j0", "wingo-k1l2-z3x4-c5v6", "wingo-b7n8-m9q0-w1e2",
+            "wingo-r3t4-y5u6-i7o8", "wingo-p9a0-s1d2-f3g4", "wingo-h5j6-k7l8-z9x0",
+            "wingo-c1v2-b3n4-m5q6", "wingo-w7e8-r9t0-y1u2", "wingo-i3o4-p5a6-s7d8",
+            "wingo-f9g0-h1j2-k3l4", "wingo-z5x6-c7v8-b9n0", "wingo-m1q2-w3e4-r5t6",
+            "wingo-y7u8-i9o0-p1a2", "wingo-s3d4-f5g6-h7j8", "wingo-k9l0-z1x2-c3v4",
+            "wingo-b5n6-m7q8-w9e0", "wingo-r1t2-y3u4-i5o6", "wingo-p7a8-s9d0-f1g2",
+            "wingo-h3j4-k5l6-z7x8", "wingo-c9v0-b1n2-m3q4", "wingo-w5e6-r7t8-y9u0",
+            "wingo-i1o2-p3a4-s5d6", "wingo-f7g8-h9j0-k1l2", "wingo-z3x4-c5v6-b7n8",
+            "wingo-m9q0-w1e2-r3t4", "wingo-y5u6-i7o8-p9a0", "wingo-s1d2-f3g4-h5j6",
+            "wingo-k7l8-z9x0-c1v2", "wingo-b3n4-m5q6-w7e8", "wingo-r9t0-y1u2-i3o4",
+            "wingo-p5a6-s7d8-f9g0", "wingo-h1j2-k3l4-z5x6", "wingo-c7v8-b9n0-m1q2",
+            "wingo-w3e4-r5t6-y7u8", "wingo-i9o0-p1a2-s3d4", "wingo-f5g6-h7j8-k9l0",
+            "wingo-z1x2-c3v4-b5n6", "wingo-m7q8-w9e0-r1t2", "wingo-y3u4-i5o6-p7a8",
+            "wingo-s9d0-f1g2-h3j4", "wingo-k5l6-z7x8-c9v0", "wingo-b1n2-m3q4-w5e6",
+            "wingo-r7t8-y9u0-i1o2", "wingo-p3a4-s5d6-f7g8", "wingo-h9j0-k1l2-z3x4"
+        ];
 
-    function checkKey(event) {  
-        event.preventDefault();  
-        let key = document.getElementById('key').value;  
-        
-        if (validKeys.includes(key)) {
-            // Check if key has already been used
-            const usedKeys = JSON.parse(localStorage.getItem('usedKeys') || '[]';
-            const usedKeysArray = JSON.parse(usedKeys);
+        function checkKey(event) {  
+            event.preventDefault();  
+            let key = document.getElementById('key').value;  
             
-            if (usedKeysArray.some(entry => entry.key === key)) {
-                alert("This key has already been used!");
+            if (validKeys.includes(key)) {
+                // Check if key has already been used
+                const usedKeys = JSON.parse(localStorage.getItem('usedKeys') || '[]');
+                
+                if (usedKeys.includes(key)) {
+                    alert("This key has already been used!");
+                    document.getElementById('key').value = '';
+                    document.getElementById('key').focus();
+                    return false;
+                }
+                
+                // Mark key as used
+                usedKeys.push(key);
+                localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
+                
+                // Play audio and show content
+                audio.play().catch(error => console.log("Audio play blocked:", error)); 
+                
+                // Show iframe with the content
+                document.getElementById('iframeContainer').style.display = 'block';
+                document.getElementById('contentFrame').src = 'https://github.com/hackersurya12/30swingo';
+                
+                // Clear the input
                 document.getElementById('key').value = '';
-                document.getElementById('key').focus();
-                return false;
-            }
-            
-            // Store the used key with timestamp
-            const loginEntry = {
-                key: key,
-                timestamp: new Date().toISOString()
-            };
-            
-            usedKeysArray.push(loginEntry);
-            localStorage.setItem('usedKeys', JSON.stringify(usedKeysArray));
-            
-            // Play audio and show content
-            audio.play().catch(error => console.log("Audio play blocked:", error)); 
-            
-            // Show iframe with the content
-            document.getElementById('iframeContainer').style.display = 'block';
-            document.getElementById('contentFrame').src = 'https://www.google.com/search?q=bdg+game&oq=&gs_lcrp=EgZjaHJvbWUqCQgCECMYJxjqAjIHCAAQRRiwATIJCAEQIxgnGOoCMgkIAhAjGCcY6gIyCQgDECMYJxjqAjIJCAQQIxgnGOoCMgkIBRAjGCcY6gIyCQgGECMYJxjqAjIJCAcQIxgnGOoCMgkICBAjGCcY6gIyCQgJECMYJxjqAjIJCAoQIxgnGOoCMgkICxAjGCcY6gIyCQgMECMYJxjqAjIJCA0QIxgnGOoCMgkIDhAjGCcY6gIyEQgPEAAYAxhCGI8BGLQCGOoCMhEIEBAAGAMYQhiPARi0AhjqAjIRCBEQABgDGEIYjwEYtAIY6gIyEQgSEAAYAxhCGI8BGLQCGOoCMhEIExAAGAMYQhiPARi0AhjqAtIBBi0xajBqN6gCFLACAQ&client=ms-android-vivo-terr1-rso2&sourceid=chrome-mobile&ie=UTF-8';
-            
-            // Clear the input
-            document.getElementById('key').value = '';
-        } else {  
-            alert("Invalid access key! Please try again.");  
-            document.getElementById('key').value = '';  
-            document.getElementById('key').focus();  
+            } else {  
+                alert("Invalid access key! Please try again.");  
+                document.getElementById('key').value = '';  
+                document.getElementById('key').focus();  
+            }  
+        }
+
+        function closeIframe() {
+            document.getElementById('iframeContainer').style.display = 'none';
+            document.getElementById('contentFrame').src = 'about:blank';
         }  
-    }
 
-    function closeIframe() {
-        document.getElementById('iframeContainer').style.display = 'none';
-        document.getElementById('contentFrame').src = 'about:blank';
-    }  
-
-    // Auto focus on key field when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('key').focus();
-    });
-</script>
+        // Auto focus on input field when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('key').focus();
+        });
+    </script>  
 </body>  
 </html>
