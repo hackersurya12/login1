@@ -13,7 +13,7 @@
             font-family: 'El Messiri', sans-serif;  
         }  
         body {  
-            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTniaWWFultO_a9z1Eh9oQB7Jl0mZDH9Cb3zllerYyIyW7XrLpw_EWYNCg9&s=10') no-repeat center center/cover;  
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaUefxA6uYUk7SNTE-zautkRqmg6CK-4irbhgcysqWRJRbSK0tnS8hp_XV&s=10') no-repeat center center/cover;  
             height: 100vh;  
             display: flex;  
             justify-content: center;  
@@ -152,6 +152,42 @@
             cursor: pointer;
             z-index: 1001;
         }
+        .countdown-container {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        .countdown-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .countdown-timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        .start-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: linear-gradient(45deg, #00c853, #00e676);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .start-btn:hover {
+            background: linear-gradient(45deg, #00e676, #00c853);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
     </style>  
 </head>  
 <body>  
@@ -159,13 +195,20 @@
         <div class="box">  
             <img src="https://i.ibb.co/G4K2gbqb/Picsart-25-03-02-22-15-39-762.png" class="floating-img" alt="Logo">  
             <form onsubmit="return checkKey(event)">  
-                <h2>WELLCOME TO SURYA WEB</h2>  
+                <h2>Welcome Back</h2>  
                 <div class="inputBox">  
                     <input type="password" id="key" required>  
                     <span>Enter Access Key</span>  
                 </div>  
                 <input type="submit" value="Login">  
             </form>  
+            
+            <div class="countdown-container" id="countdownContainer">
+                <div class="countdown-title">Your access expires in:</div>
+                <div class="countdown-timer" id="countdownTimer"></div>
+                <button class="start-btn" id="startBtn">Start</button>
+            </div>
+            
             <div class="footer-text">Secure Access Only</div>  
         </div>  
     </div>  
@@ -221,47 +264,112 @@
 
         function checkKey(event) {  
             event.preventDefault();  
-            let key = document.getElementById('key').value;  
+            let key = document.getElementById('key').value.trim();  
             
             if (validKeys.includes(key)) {
                 // Check if key has already been used
-                const usedKeys = JSON.parse(localStorage.getItem('usedKeys') || '[]');
+                const usedKeys = JSON.parse(localStorage.getItem('usedKeys') || [];
+                const keyData = JSON.parse(localStorage.getItem('keyData') || {});
                 
                 if (usedKeys.includes(key)) {
-                    alert("This key has already been used!");
-                    document.getElementById('key').value = '';
-                    document.getElementById('key').focus();
-                    return false;
+                    // Key exists, check expiration
+                    if (keyData[key] && new Date(keyData[key].expiry) > new Date()) {
+                        // Valid existing key
+                        showCountdown(keyData[key].expiry);
+                        document.getElementById('key').value = '';
+                        return true;
+                    } else {
+                        alert("This key has expired!");
+                        document.getElementById('key').value = '';
+                        document.getElementById('key').focus();
+                        return false;
+                    }
                 }
+                
+                // New key - store with expiry date (1 month from now)
+                const expiryDate = new Date();
+                expiryDate.setMonth(expiryDate.getMonth() + 1);
+                
+                keyData[key] = {
+                    expiry: expiryDate.toISOString()
+                };
+                localStorage.setItem('keyData', JSON.stringify(keyData));
                 
                 // Mark key as used
                 usedKeys.push(key);
                 localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
                 
-                // Play audio and show content
-                audio.play().catch(error => console.log("Audio play blocked:", error)); 
-                
-                // Show iframe with the content
-                document.getElementById('iframeContainer').style.display = 'block';
-                document.getElementById('contentFrame').src = 'https://hackersurya12.github.io/home1/';
+                // Show countdown
+                showCountdown(expiryDate.toISOString());
                 
                 // Clear the input
                 document.getElementById('key').value = '';
+                return true;
             } else {  
                 alert("Invalid access key! Please try again.");  
                 document.getElementById('key').value = '';  
                 document.getElementById('key').focus();  
+                return false;
             }  
+        }
+
+        function showCountdown(expiryDate) {
+            const countdownContainer = document.getElementById('countdownContainer');
+            const countdownTimer = document.getElementById('countdownTimer');
+            const startBtn = document.getElementById('startBtn');
+            
+            countdownContainer.style.display = 'block';
+            
+            // Update countdown every second
+            const countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const expiry = new Date(expiryDate).getTime();
+                const distance = expiry - now;
+                
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    countdownTimer.innerHTML = "EXPIRED";
+                    startBtn.disabled = true;
+                    return;
+                }
+                
+                // Calculate days, hours, minutes, seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                countdownTimer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+            
+            // Start button functionality
+            startBtn.onclick = function() {
+                audio.play().catch(error => console.log("Audio play blocked:", error)); 
+                document.getElementById('iframeContainer').style.display = 'block';
+                document.getElementById('contentFrame').src = 'https://github.com/hackersurya12/30swingo';
+            };
         }
 
         function closeIframe() {
             document.getElementById('iframeContainer').style.display = 'none';
             document.getElementById('contentFrame').src = 'about:blank';
+            audio.pause();
         }  
 
         // Auto focus on input field when page loads
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('key').focus();
+            
+            // Check if there's an active key on page load
+            const usedKeys = JSON.parse(localStorage.getItem('usedKeys') || '[]');
+            const keyData = JSON.parse(localStorage.getItem('keyData') || '{}');
+            
+            for (const key of usedKeys) {
+                if (keyData[key] && new Date(keyData[key].expiry) > new Date()) {
+                    showCountdown(keyData[key].expiry);
+                    break;
+                }
+            }
         });
     </script>  
 </body>  
