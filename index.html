@@ -1,130 +1,170 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Wingo Login</title>  
-    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&display=swap" rel="stylesheet">  
-    <style>  
-        * {  
-            margin: 0;  
-            padding: 0;  
-            box-sizing: border-box;  
-            font-family: 'El Messiri', sans-serif;  
-        }  
-        body {  
-            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTniaWWFultO_a9z1Eh9oQB7Jl0mZDH9Cb3zllerYyIyW7XrLpw_EWYNCg9&s=10') no-repeat center center/cover;  
-            height: 100vh;  
-            display: flex;  
-            justify-content: center;  
-            align-items: center;  
-            position: relative;  
-        }  
-        .holder {  
-            position: absolute;  
-            width: 350px;  
-            background: rgba(0, 0, 0, 0.7);  
-            padding: 30px;  
-            border-radius: 15px;  
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);  
-            backdrop-filter: blur(8px);  
-            border: 1px solid rgba(255, 255, 255, 0.1);  
-            animation: fadeIn 0.8s ease-out;  
-            color: white;  
-        }  
-        @keyframes fadeIn {  
-            from {  
-                opacity: 0;  
-                transform: translateY(-20px);  
-            }  
-            to {  
-                opacity: 1;  
-                transform: translateY(0);  
-            }  
-        }  
-        .box h2 {  
-            text-align: center;  
-            margin-bottom: 25px;  
-            font-size: 24px;  
-            color: #fff;  
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);  
-        }  
-        .floating-img {  
-            display: block;  
-            margin: 0 auto 20px;  
-            width: 120px;  
-            animation: floatUpDown 3s infinite alternate ease-in-out;  
-            filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.3));  
-        }  
-        @keyframes floatUpDown {  
-            0% {  
-                transform: translateY(0px);  
-            }  
-            100% {  
-                transform: translateY(-15px);  
-            }  
-        }  
-        .inputBox {  
-            position: relative;  
-            margin-bottom: 25px;  
-        }  
-        .inputBox input {  
-            width: 100%;  
-            padding: 12px 15px;  
-            border: 1px solid rgba(255, 255, 255, 0.3);  
-            border-radius: 8px;  
-            outline: none;  
-            background: rgba(255, 255, 255, 0.1);  
-            color: white;  
-            font-size: 16px;  
-            transition: all 0.3s;  
-        }  
-        .inputBox input:focus {  
-            border-color: rgba(255, 255, 255, 0.7);  
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);  
-        }  
-        .inputBox span {  
-            position: absolute;  
-            left: 15px;  
-            top: 50%;  
-            transform: translateY(-50%);  
-            font-size: 16px;  
-            color: rgba(255, 255, 255, 0.7);  
-            pointer-events: none;  
-            transition: 0.3s;  
-        }  
-        .inputBox input:focus + span,  
-        .inputBox input:valid + span {  
-            top: 0;  
-            font-size: 12px;  
-            background: rgba(0, 0, 0, 0.7);  
-            padding: 0 5px;  
-            color: #fff;  
-        }  
-        input[type="submit"] {  
-            width: 100%;  
-            padding: 12px;  
-            border: none;  
-            background: linear-gradient(45deg, #ff8a00, #e52e71);  
-            color: white;  
-            font-size: 16px;  
-            font-weight: bold;  
-            border-radius: 8px;  
-            cursor: pointer;  
-            transition: all 0.3s;  
-            margin-top: 10px;  
-        }  
-        input[type="submit"]:hover {  
-            background: linear-gradient(45deg, #e52e71, #ff8a00);  
-            transform: translateY(-2px);  
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);  
-        }  
-        .footer-text {  
-            text-align: center;  
-            margin-top: 20px;  
-            font-size: 12px;  
-            color: rgba(255, 255, 255, 0.5);  
-        }  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wingo Access Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'El Messiri', sans-serif;
+        }
+        body {
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTniaWWFultO_a9z1Eh9oQB7Jl0mZDH9Cb3zllerYyIyW7XrLpw_EWYNCg9&s=10') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+        
+        .holder {
+            position: absolute;
+            width: 350px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.8s ease-out;
+            color: white;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .floating-img {
+            display: block;
+            margin: 0 auto 20px;
+            width: 120px;
+            animation: floatUpDown 3s infinite alternate ease-in-out;
+            filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.3));
+        }
+        
+        @keyframes floatUpDown {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .inputBox {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .inputBox input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .inputBox input:focus {
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .inputBox span {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            pointer-events: none;
+            transition: 0.3s;
+        }
+        
+        .inputBox input:focus + span,
+        .inputBox input:valid + span {
+            top: 0;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0 5px;
+            color: #fff;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .login-btn {
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(45deg, #e52e71, #ff8a00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .start-btn {
+            background: linear-gradient(45deg, #00c853, #00e676);
+            margin-top: 15px;
+        }
+        
+        .start-btn:hover {
+            background: linear-gradient(45deg, #00e676, #00c853);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logout-btn {
+            background: linear-gradient(45deg, #ff1744, #f50057);
+            margin-top: 15px;
+        }
+        
+        .logout-btn:hover {
+            background: linear-gradient(45deg, #f50057, #ff1744);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
         .iframe-container {
             display: none;
             position: fixed;
@@ -135,11 +175,13 @@
             z-index: 1000;
             background: rgba(0, 0, 0, 0.9);
         }
+        
         .iframe-container iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+        
         .close-btn {
             position: absolute;
             top: 20px;
@@ -152,88 +194,125 @@
             cursor: pointer;
             z-index: 1001;
         }
+        
         .countdown-container {
-            display: none;
             text-align: center;
             margin-top: 20px;
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
         }
+        
         .countdown-title {
             font-size: 16px;
             margin-bottom: 10px;
             color: rgba(255, 255, 255, 0.8);
         }
+        
         .countdown-timer {
             font-size: 24px;
             font-weight: bold;
             color: #fff;
             margin-bottom: 15px;
         }
-        .start-btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: linear-gradient(45deg, #00c853, #00e676);
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 15px;
-        }
-        .start-btn:hover {
-            background: linear-gradient(45deg, #00e676, #00c853);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
+        
         .expiry-date {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.7);
             margin-top: 10px;
         }
-    </style>  
-</head>  
-<body>  
-    <div class="holder">  
-        <div class="box">  
-            <img src="https://i.ibb.co/G4K2gbqb/Picsart-25-03-02-22-15-39-762.png" class="floating-img" alt="Logo">  
-            <form onsubmit="return checkKey(event)">  
-                <h2>WELCOME TO SURYA WEB</h2>  
-                <div class="inputBox">  
-                    <input type="password" id="key" required>  
-                    <span>Enter Access Key</span>  
-                </div>  
-                <input type="submit" value="Login">  
-            </form>  
-            
+        
+        #loginPage {
+            display: block;
+        }
+        
+        #startPage {
+            display: none;
+        }
+        
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .error-message {
+            color: #ff5252;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="holder">
+        <div class="box">
+            <img src="https://i.ibb.co/G4K2gbqb/Picsart-25-03-02-22-15-39-762.png" class="floating-img" alt="Logo">
+            <form id="loginForm">
+                <h2>WELCOME TO SURYA WEB</h2>
+                <div class="inputBox">
+                    <input type="password" id="key" required>
+                    <span>Enter Access Key</span>
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+                <input type="submit" class="btn login-btn" value="Login">
+            </form>
+            <div class="footer-text">Secure Access Only</div>
+        </div>
+    </div>
+    
+    <!-- Start Page -->
+    <div id="startPage" class="holder">
+        <div class="box">
+            <img src="https://i.ibb.co/G4K2gbqb/Picsart-25-03-02-22-15-39-762.png" class="floating-img" alt="Logo">
+            <h2>ACCESS GRANTED</h2>
+            <div class="user-info" id="userInfo"></div>
             <div class="countdown-container" id="countdownContainer">
                 <div class="countdown-title">Your access expires in:</div>
                 <div class="countdown-timer" id="countdownTimer"></div>
                 <div class="expiry-date" id="expiryDate"></div>
-                <button class="start-btn" id="startBtn">Start Now</button>
             </div>
-            
-            <div class="footer-text">Secure Access Only</div>  
-        </div>  
-    </div>  
+            <button class="btn start-btn" id="startBtn">Start Now</button>
+            <button class="btn logout-btn" id="logoutBtn">Logout</button>
+            <div class="footer-text">Session Active</div>
+        </div>
+    </div>
 
+    <!-- Content Frame -->
     <div class="iframe-container" id="iframeContainer">
-        <button class="close-btn" onclick="closeIframe()">Close</button>
+        <button class="close-btn" id="closeBtn">Close</button>
         <iframe id="contentFrame" src="about:blank"></iframe>
     </div>
 
-    <audio id="backgroundMusic" loop>  
-        <source src="https://www.dropbox.com/scl/fi/your-audio-file.mp3?rlkey=yourkey&raw=1" type="audio/mpeg">  
-        Your browser does not support the audio element.  
-    </audio>  
+    <audio id="backgroundMusic" loop>
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <script>  
-        let audio = document.getElementById("backgroundMusic");  
-        const validKeys = [
-            "wingo-7x9p-2k4r-8z3q", "wingo-1a2b-3c4d-5e6f", "wingo-9y8z-7x6w-5v4u",
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const loginPage = document.getElementById('loginPage');
+            const startPage = document.getElementById('startPage');
+            const loginForm = document.getElementById('loginForm');
+            const keyInput = document.getElementById('key');
+            const startBtn = document.getElementById('startBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const countdownTimer = document.getElementById('countdownTimer');
+            const expiryDateElement = document.getElementById('expiryDate');
+            const userInfoElement = document.getElementById('userInfo');
+            const iframeContainer = document.getElementById('iframeContainer');
+            const contentFrame = document.getElementById('contentFrame');
+            const closeBtn = document.getElementById('closeBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const audio = document.getElementById('backgroundMusic');
+            
+            // Valid access keys
+            const validKeys = [
+                "wingo-7x9p-2k4r-8z3q", "wingo-1a2b-3c4d-5e6f", "wingo-9y8z-7x6w-5v4u",
             "wingo-q1w2-e3r4-t5y6", "wingo-u7i8-o9p0-a1s2", "wingo-d3f4-g5h6-j7k8",
             "wingo-l9m0-n1b2-v3c4", "wingo-x5z6-q7w8-s9e0", "wingo-r1t2-y3u4-i5o6",
             "wingo-p7a8-s9d0-f1g2", "wingo-h3j4-k5l6-z7x8", "wingo-c9v0-b1n2-m3q4",
@@ -267,31 +346,73 @@
             "wingo-z1x2-c3v4-b5n6", "wingo-m7q8-w9e0-r1t2", "wingo-y3u4-i5o6-p7a8",
             "wingo-s9d0-f1g2-h3j4", "wingo-k5l6-z7x8-c9v0", "wingo-b1n2-m3q4-w5e6",
             "wingo-r7t8-y9u0-i1o2", "wingo-p3a4-s5d6-f7g8", "wingo-h9j0-k1l2-z3x4"
-        ];
-
-        function checkKey(event) {  
-            event.preventDefault();  
-            let key = document.getElementById('key').value.trim();  
+            ];
             
-            if (validKeys.includes(key)) {
-                // Initialize localStorage items if they don't exist
-                let usedKeys = JSON.parse(localStorage.getItem('usedKeys') || '[]');
-                let keyData = JSON.parse(localStorage.getItem('keyData') || '{}');
+            // Current active key and countdown interval
+            let activeKey = null;
+            let countdownInterval = null;
+            
+            // Initialize
+            keyInput.focus();
+            checkActiveSession();
+            
+            // Form submission handler
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const key = keyInput.value.trim();
+                
+                if (checkKey(key)) {
+                    activeKey = key;
+                    saveKeyData(key);
+                    showStartPage();
+                    keyInput.value = '';
+                    errorMessage.style.display = 'none';
+                } else {
+                    showError("Invalid access key! Please try again.");
+                    keyInput.value = '';
+                    keyInput.focus();
+                }
+            });
+            
+            // Start button click handler
+            startBtn.addEventListener('click', function() {
+                audio.play().catch(error => console.log("Audio play blocked:", error));
+                iframeContainer.style.display = 'block';
+                contentFrame.src = 'https://hackersurya12.github.io/home1/';
+            });
+            
+            // Logout button click handler
+            logoutBtn.addEventListener('click', function() {
+                closeIframe();
+                showLoginPage();
+            });
+            
+            // Close iframe button
+            closeBtn.addEventListener('click', closeIframe);
+            
+            // Check if key is valid
+            function checkKey(key) {
+                if (!validKeys.includes(key)) return false;
+                
+                const usedKeys = getUsedKeys();
+                const keyData = getKeyData();
                 
                 if (usedKeys.includes(key)) {
                     // Key exists, check expiration
                     if (keyData[key] && new Date(keyData[key].expiry) > new Date()) {
-                        // Valid existing key
-                        showCountdown(keyData[key].expiry);
-                        document.getElementById('key').value = '';
                         return true;
                     } else {
-                        alert("This key has expired!");
-                        document.getElementById('key').value = '';
-                        document.getElementById('key').focus();
+                        showError("This key has expired!");
                         return false;
                     }
                 }
+                return true;
+            }
+            
+            // Save key data to localStorage
+            function saveKeyData(key) {
+                const usedKeys = getUsedKeys();
+                const keyData = getKeyData();
                 
                 // New key - store with expiry date (30 days from now)
                 const expiryDate = new Date();
@@ -303,38 +424,62 @@
                 };
                 localStorage.setItem('keyData', JSON.stringify(keyData));
                 
-                // Mark key as used
-                usedKeys.push(key);
-                localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
+                // Mark key as used if not already
+                if (!usedKeys.includes(key)) {
+                    usedKeys.push(key);
+                    localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
+                }
+            }
+            
+            // Show start page with countdown
+            function showStartPage() {
+                loginPage.style.display = 'none';
+                startPage.style.display = 'block';
                 
-                // Show countdown and start button
-                showCountdown(expiryDate.toISOString());
+                const keyData = getKeyData();
+                const expiryDate = keyData[activeKey]?.expiry;
                 
-                // Clear the input
-                document.getElementById('key').value = '';
-                return true;
-            } else {  
-                alert("Invalid access key! Please try again.");  
-                document.getElementById('key').value = '';  
-                document.getElementById('key').focus();  
-                return false;
-            }  
-        }
-
-        function showCountdown(expiryDate) {
-            const countdownContainer = document.getElementById('countdownContainer');
-            const countdownTimer = document.getElementById('countdownTimer');
-            const expiryDateElement = document.getElementById('expiryDate');
-            const startBtn = document.getElementById('startBtn');
+                if (!expiryDate) {
+                    showError("Error: Key data not found!");
+                    showLoginPage();
+                    return;
+                }
+                
+                // Display user info
+                userInfoElement.textContent = `Access Key: ${activeKey.substring(0, 4)}...${activeKey.slice(-4)}`;
+                
+                // Format and display expiry date
+                const expiry = new Date(expiryDate);
+                expiryDateElement.textContent = `Expires on: ${expiry.toLocaleDateString()} at ${expiry.toLocaleTimeString()}`;
+                
+                // Start countdown
+                startCountdown(expiryDate);
+            }
             
-            countdownContainer.style.display = 'block';
+            // Show login page
+            function showLoginPage() {
+                activeKey = null;
+                if (countdownInterval) clearInterval(countdownInterval);
+                startPage.style.display = 'none';
+                loginPage.style.display = 'block';
+                keyInput.focus();
+            }
             
-            // Format and display expiry date
-            const expiry = new Date(expiryDate);
-            expiryDateElement.textContent = `Expires on: ${expiry.toLocaleDateString()} at ${expiry.toLocaleTimeString()}`;
+            // Start countdown timer
+            function startCountdown(expiryDate) {
+                // Clear any existing interval
+                if (countdownInterval) clearInterval(countdownInterval);
+                
+                updateCountdown(expiryDate); // Initial update
+                
+                // Update countdown every second
+                countdownInterval = setInterval(() => {
+                    updateCountdown(expiryDate);
+                }, 1000);
+            }
             
-            // Update countdown every second
-            const countdownInterval = setInterval(() => {
+            // Update countdown display
+            function updateCountdown(expiryDate) {
                 const now = new Date().getTime();
                 const expiryTime = new Date(expiryDate).getTime();
                 const distance = expiryTime - now;
@@ -353,40 +498,47 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
                 countdownTimer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            }, 1000);
+            }
             
-            // Start button functionality - opens the page immediately
-            startBtn.onclick = function() {
-                audio.play().catch(error => console.log("Audio play blocked:", error)); 
-                document.getElementById('iframeContainer').style.display = 'block';
-                document.getElementById('contentFrame').src = 'https://hackersurya12.github.io/home1/';
-            };
+            // Close iframe
+            function closeIframe() {
+                iframeContainer.style.display = 'none';
+                contentFrame.src = 'about:blank';
+                audio.pause();
+            }
             
-            // Automatically open the page after successful login
-            startBtn.click();
-        }
-
-        function closeIframe() {
-            document.getElementById('iframeContainer').style.display = 'none';
-            document.getElementById('contentFrame').src = 'about:blank';
-            audio.pause();
-        }  
-
-        // Auto focus on input field when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('key').focus();
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
             
-            // Check if there's an active key on page load
-            let usedKeys = JSON.parse(localStorage.getItem('usedKeys') || '[]');
-            let keyData = JSON.parse(localStorage.getItem('keyData') || '{}');
-            
-            for (const key of usedKeys) {
-                if (keyData[key] && new Date(keyData[key].expiry) > new Date()) {
-                    showCountdown(keyData[key].expiry);
-                    break;
+            // Check for active session on page load
+            function checkActiveSession() {
+                const usedKeys = getUsedKeys();
+                const keyData = getKeyData();
+                
+                for (const key of usedKeys) {
+                    if (keyData[key] && new Date(keyData[key].expiry) > new Date()) {
+                        activeKey = key;
+                        showStartPage();
+                        break;
+                    }
                 }
             }
+            
+            // Helper functions for localStorage
+            function getUsedKeys() {
+                return JSON.parse(localStorage.getItem('usedKeys') || '[]');
+            }
+            
+            function getKeyData() {
+                return JSON.parse(localStorage.getItem('keyData') || '{}');
+            }
         });
-    </script>  
-</body>  
+    </script>
+</body>
 </html>
