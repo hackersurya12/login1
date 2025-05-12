@@ -532,6 +532,10 @@
                     <span class="session-label">IP Address:</span>
                     <span class="session-value" id="ipAddress">Loading...</span>
                 </div>
+                <div class="session-row">
+                    <span class="session-label">Device Type:</span>
+                    <span class="session-value" id="deviceType">Loading...</span>
+                </div>
             </div>
             
             <div class="countdown-container" id="countdownContainer">
@@ -543,7 +547,7 @@
             <div class="features-list">
                 <div class="feature-item">
                     <i class="fas fa-check-circle feature-icon"></i>
-                    <span>Full Access to Premium Content</span>
+                    <span>Full Access to Premium Hack</span>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-check-circle feature-icon"></i>
@@ -595,6 +599,7 @@
             const userInfoElement = document.getElementById('userInfo');
             const sessionActiveTime = document.getElementById('sessionActiveTime');
             const ipAddressElement = document.getElementById('ipAddress');
+            const deviceTypeElement = document.getElementById('deviceType');
             const iframeContainer = document.getElementById('iframeContainer');
             const contentFrame = document.getElementById('contentFrame');
             const closeBtn = document.getElementById('closeBtn');
@@ -603,7 +608,7 @@
             
             // Valid access keys
             const validKeys = [
-              "wingo-7x9p-2k4r-8z3q", "wingo-1a2b-3c4d-5e6f", "wingo-9y8z-7x6w-5v4u",
+             "wingo-7x9p-2k4r-8z3q", "wingo-1a2b-3c4d-5e6f", "wingo-9y8z-7x6w-5v4u",
             "wingo-q1w2-e3r4-t5y6", "wingo-u7i8-o9p0-a1s2", "wingo-d3f4-g5h6-j7k8",
             "wingo-l9m0-n1b2-v3c4", "wingo-x5z6-q7w8-s9e0", "wingo-r1t2-y3u4-i5o6",
             "wingo-p7a8-s9d0-f1g2", "wingo-h3j4-k5l6-z7x8", "wingo-c9v0-b1n2-m3q4",
@@ -660,7 +665,7 @@
             // Initialize
             keyInput.focus();
             checkActiveSession();
-            fetchIPAddress();
+            fetchIPAndDeviceInfo();
             
             // Password visibility toggle
             togglePassword.addEventListener('click', function() {
@@ -896,15 +901,60 @@
                 }
             }
             
-            // Fetch IP address
-            function fetchIPAddress() {
-                fetch('https://api.ipify.org?format=json')
+            // Fetch IP address and device information
+            function fetchIPAndDeviceInfo() {
+                // First try ipapi.co
+                fetch('https://ipapi.co/json/')
                     .then(response => response.json())
                     .then(data => {
-                        ipAddressElement.textContent = data.ip;
+                        ipAddressElement.textContent = data.ip || 'Unknown';
+                        
+                        // Detect device type
+                        const userAgent = navigator.userAgent;
+                        let deviceType = 'Desktop';
+                        
+                        if (/Android/i.test(userAgent)) {
+                            deviceType = 'Android';
+                        } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                            deviceType = 'iOS';
+                        } else if (/Windows Phone/i.test(userAgent)) {
+                            deviceType = 'Windows Phone';
+                        } else if (/Mobile/i.test(userAgent)) {
+                            deviceType = 'Mobile';
+                        } else if (/Tablet/i.test(userAgent)) {
+                            deviceType = 'Tablet';
+                        }
+                        
+                        deviceTypeElement.textContent = deviceType;
                     })
                     .catch(() => {
-                        ipAddressElement.textContent = 'Unknown';
+                        // If ipapi.co fails, try another service
+                        fetch('https://api.ipify.org?format=json')
+                            .then(response => response.json())
+                            .then(data => {
+                                ipAddressElement.textContent = data.ip || 'Unknown';
+                            })
+                            .catch(() => {
+                                ipAddressElement.textContent = 'Unknown';
+                            });
+                        
+                        // Fallback device detection
+                        const userAgent = navigator.userAgent;
+                        let deviceType = 'Desktop';
+                        
+                        if (/Android/i.test(userAgent)) {
+                            deviceType = 'Android';
+                        } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                            deviceType = 'iOS';
+                        } else if (/Windows Phone/i.test(userAgent)) {
+                            deviceType = 'Windows Phone';
+                        } else if (/Mobile/i.test(userAgent)) {
+                            deviceType = 'Mobile';
+                        } else if (/Tablet/i.test(userAgent)) {
+                            deviceType = 'Tablet';
+                        }
+                        
+                        deviceTypeElement.textContent = deviceType;
                     });
             }
             
